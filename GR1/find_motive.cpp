@@ -4,40 +4,41 @@
 
 using namespace std;
 
-bool CheckWord(char* filename, char* search)
+int CheckWord(char* filename, char* search)
 {
     int offset; 
     string line;
     ifstream Myfile;
+    int found = 0;
+    string word;
     Myfile.open (filename);
 
     if (Myfile.is_open())
     {
         while (!Myfile.eof())
         {
-            getline(Myfile,line);
-            if ((offset = line.find(search, 0)) != string::npos) 
+            //getline(Myfile,line);
+            //if ((offset = line.find(search, 0)) != string::npos) 
+            while(Myfile >> word)
             {
-                cout << "found '" << search << "' in '" << line << "'" << endl;
-                Myfile.close();
-                return true;
-            }
-            else
-            {
-                cout << "Not found" << endl;
+                if(word == search)
+                    found += 1;
             }
         }
         Myfile.close();
+        printf("The file %s contains %d words containing the motive %s\n", filename, found, search);
+        return 0;
     }
     else
-        cout << "Unable to open this file." << endl;
-
-    return false;
+        {
+            printf("The file *input-file-path* could not be opened.");
+            return 1;
+        }
 }
 
 
 int main () 
 {    
-    CheckWord("dictionary.txt", "need");    
+    CheckWord("../test.txt", "rose");    
     return 0;
 }
