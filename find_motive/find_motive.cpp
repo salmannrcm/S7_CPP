@@ -1,19 +1,6 @@
-/*#include <ofstream>
-#include <ifstream>
-
-int find_motive(std::string &filepath){
-    ifstream myfile;
-    myfile.open(filepath);
-    if(myfile){
-        int count 
-    }
-}*/
-
-#include <iostream>
-#include <fstream>
-#include <string>
-
 using namespace std;
+#include <fstream>
+#include "find_motive.h"
 
 int CheckWord(std::string filename, std::string search)
 {
