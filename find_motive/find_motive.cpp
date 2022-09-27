@@ -47,6 +47,6 @@ int CheckWord(std::string filename, std::string search)
 
 int main () 
 {
-    CheckWord("/Users/zaki/CPP_apping/find_motive/test.txt", "rose");    
+    CheckWord("../tex.txt", "rose");    
     return 0;
 }
