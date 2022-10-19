@@ -1,0 +1,7 @@
+is_prime :
+
+attention petit oublie sur quelque return vous avez oublié de mettre la valeur (ex: ligne 7) mais vous l'avez bien fait à d'autre endroit (ligne 9). Des conditions "If" à revoir (ligne 14), certaines conditions sont en trop. Sinon tout est top rien à dire.
+
+find_motive : 
+
+Parfai, rien à dire 😉

@@ -6,17 +6,30 @@
 
 Vector::Vector()
 {
-    x = 0;
-    y = 0;
+    size = NDIM;
+    for(size_t i = 0;i < size; i++)
+        data[i] = 0;
 }
 
-Vector::Vector(int a, int b) : x{a}, y{b}
-{}
+Vector::Vector(std::initializer_list<value> l)
+{
+    size = l.size();
+    int i = 0;
+    for(auto & val : l)
+    {
+        data[i++] = val;
+    }
+}
+
+size_t Vector::getSize() const
+{
+    return size;
+}
 
 Vector& Vector::operator+=(const Vector& rhs)
 {
-    x += rhs.x;
-    y += rhs.y;
+    for (int i = 0; i < rhs.getSize(); i++)
+        data[i] += rhs[i];
     return *this;
 }
 
@@ -24,61 +37,72 @@ Vector& Vector::operator+=(const Vector& rhs)
 
 Vector& Vector::operator-=(const Vector& rhs)
 {
-    x -= rhs.x;
-    y -= rhs.y;
+    for (int i = 0; i < rhs.getSize(); i++)
+        data[i] -= rhs[i];
     return *this;
 }
 
-value Vector::operator*=(const Vector& rhs)
+Vector Vector::operator+(const Vector& rhs)
 {
-    return x*rhs.getX()+y*rhs.getY();
+    auto v = Vector();
+    for (int i = 0; i < rhs.getSize(); i++)
+        v[i] = rhs[i] + (*this)[i];
+    return v;
 }
 
-Vector& Vector::operator*=(int a)
+Vector Vector::operator-(const Vector& rhs)
 {
-    x *= a;
-    y *= a;
-    return *this;
+    auto v = Vector();
+    for (int i = 0; i < rhs.getSize(); i++)
+        v[i] = rhs[i] - (*this)[i];
+    return v;
 }
 
-Vector& Vector::operator+=(int a)
+value Vector::operator*(const Vector& rhs)
 {
-    x += a;
-    y += a;
-    return *this;
+    value v = 0;
+    for (int i = 0; i < rhs.getSize(); i++)
+        v += rhs[i] * (*this)[i];
+    return v;
 }
 
-int& Vector::operator[](int a)
+value Vector::operator[](size_t i) const
 {
-    return ( a == 0 ? x : y);
+    return data[i];
 }
 
-std::ostream& operator<<(std::ostream& os, const Vector& rhs)
+value& Vector::operator[](size_t i)
 {
-  return os << '{' << rhs.getX() << ',' << rhs.getY() << '}';
+    return data[i];
 }
 
-Vector& operator+(Vector& lhs, const Vector& rhs)
+Vector operator*(Vector& rhs,const value val)
 {
-    return lhs += rhs;
+    auto v = Vector();
+    for (int i = 0; i < rhs.getSize(); i++)
+        v[i] = rhs[i] * val;
+    return v;
 }
 
-Vector& operator-(Vector& lhs, const Vector& rhs)
+Vector operator*=(Vector& rhs, const value a)
 {
-    return lhs -= rhs;
+    for (int i = 0; i < rhs.getSize(); i++)
+        rhs[i] *= a;
+    return rhs;
 }
 
-value operator*(Vector& lhs, const Vector& rhs)
+
+Vector operator+=(Vector& rhs, const value a)
 {
-    return lhs *= rhs;
+    for (int i = 0; i < rhs.getSize(); i++)
+        rhs[i] += a;
+    return rhs;
 }
 
-Vector& operator*(Vector& lhs, const int a)
+std::ostream& operator<<(std::ostream &os, const Vector& rhs)
 {
-    return lhs *= a;
-}
-
-Vector& operator+(Vector& lhs, const int a)
-{
-    return lhs += a;
+    os << "{";
+    for (int i = 0; i < rhs.getSize(); i++)
+        os << rhs[i] << (i == rhs.getSize() - 1 ? "" : ",");
+    return os << "}";
 }

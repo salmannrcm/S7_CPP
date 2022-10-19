@@ -1,0 +1,2 @@
+Attention, le main a été modifié , la taille du vecteur n'est plus fixe mais définie par un paramètre NDIM
+Il faudra réadapter les méthodes implémenter à ce nouvel exercice.
