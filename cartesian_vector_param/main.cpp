@@ -1,4 +1,3 @@
-// vector-test.cc
 #include <iostream>
 
 #include "vector.h"
