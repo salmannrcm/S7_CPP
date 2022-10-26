@@ -1,7 +1,15 @@
 cmake_minimum_required(VERSION 3.0)
-project(find_motive)
 
-set(CMAKE_CXX_STANDARD 14)
+# set the project name
+project(MyFirstProg)
 
-add_executable(main
-        find_motive.cc)
+# add the lib
+# add_library(mysource SHARED sources.cpp)
+
+# add another
+
+# add the executable
+add_executable(main main.cpp)
+
+# do not forget to link
+

@@ -14,7 +14,7 @@ Vector::Vector()
 Vector::Vector(std::initializer_list<value> l)
 {
     size = l.size();
-    int i = 0;
+    size_t i = 0;
     for(auto & val : l)
     {
         data[i++] = val;
